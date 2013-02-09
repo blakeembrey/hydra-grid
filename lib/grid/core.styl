@@ -1,0 +1,115 @@
+// Currently the grid generation is severely limited by the fact that Stylus
+// can't `@extend` within a loop or using a string/interpolated selector
+
+@import "config"
+
+grid-generate($units, $prefix = "")
+
+	$grid-prefix = ""
+
+	if support-for-bootstrap
+		grid-prefix = ""
+
+	if grid-prefix
+		$grid-prefix = s("%s-", unquote(grid-prefix))
+
+	.{$grid-prefix}container
+		margin: 0 auto
+		if support-for-ie && unit(grid-gutter-width) == "rem"
+			padding: 0 rem(grid-gutter-width / 2)
+		else
+			padding: 0 (grid-gutter-width / 2)
+		overflow: hidden
+
+	.{$grid-prefix}row,
+	.{$grid-prefix}row > .{$grid-prefix}row
+		if support-for-ie && unit(grid-gutter-width) == "rem"
+			margin: 0 rem(grid-gutter-width * -0.5)
+		else
+			margin: 0 (grid-gutter-width * -0.5)
+		display: block
+		text-align: grid-alignment
+		word-spacing: -0.43em
+		letter-spacing: -0.31em
+		text-rendering: optimizespeed
+
+	.{$grid-prefix}row > *
+		text-align: left
+		word-spacing: normal
+		letter-spacing: normal
+		text-rendering: auto
+
+	.{$grid-prefix}row > .{$grid-prefix}row
+		margin: 0
+		overflow: hidden
+
+	// Set a prefix for the current generator
+	if $prefix
+		$prefix = s("%s-", unquote($prefix))
+	// The global prefix also need to be taken into account
+	if $grid-prefix
+		$prefix = s("%s%s", unquote($grid-prefix), unquote($prefix))
+
+	// Allow a loop around for the column count, allows for multiple grids within generator
+	for $columns in $units
+		// Generate the full width columns outside the loop for extension
+		$full-suffix = $columns
+		if grid-force-suffix or length($units) > 1
+			$full-suffix = s("%sof%s", $columns, $columns)
+
+		for $i in 0...$columns
+			$suffix = $i
+			if grid-force-suffix or length($units) > 1
+				$suffix = s("%sof%s", $i, $columns)
+			// Mega hack because can't extend generated css
+			unquote(s(".%sspan%s,", $prefix, $suffix))
+
+		.{$prefix}span{$full-suffix},
+		.{$prefix}span
+			display: inline-block
+			width: 100%
+			box-sizing: border-box
+			if support-for-ie and unit(grid-gutter-width) == "rem"
+				padding-left: rem(grid-gutter-width * 0.5)
+				padding-right: rem(grid-gutter-width * 0.5)
+			else
+				padding-left: (grid-gutter-width * 0.5)
+				padding-right: (grid-gutter-width * 0.5)
+			vertical-align: top
+
+		for $i in 0...$columns
+			$suffix = $i
+			if grid-force-suffix or length($units) > 1
+				$suffix = s("%sof%s", $i, $columns)
+			// Mega hack because can't extend generated css
+			unquote(s(".%spush%s,", $prefix, $suffix))
+			unquote(s(".%spull%s,", $prefix, $suffix))
+
+		.{$prefix}push{$full-suffix},
+		.{$prefix}pull{$full-suffix}
+			position: relative
+
+		// Loop over the column count - start at 0 for resets and
+		// end at `count - 1` since full width would be set already
+		for $i in 0...$columns
+			$suffix = $i
+			if grid-force-suffix or length($units) > 1
+				$suffix = s("%sof%s", $i, $columns)
+			// Basic width measurement for the grid
+			.{$prefix}span{$suffix}
+				width: (100% / $columns) * $i
+
+			if support-for-bootstrap
+				unquote(s(".%soffset%s", $prefix, $suffix))
+			// Prepend spacing to the span
+			.{$prefix}prefix{$suffix}
+				margin-left: (100% / $columns) * $i
+			// Append spacing after the span
+			.{$prefix}suffix{$suffix}
+				margin-right: (100% / $columns) * $i
+			// Generate the push classes - pushes the span to the right
+			.{$prefix}push{$suffix}
+				left: (100% / $columns) * $i
+			// Generate the pull classes - pulls the span to the left
+			.{$prefix}pull{$suffix}
+				left: (100% / $columns) * $i * -1
