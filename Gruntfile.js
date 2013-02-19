@@ -12,7 +12,7 @@ module.exports = function (grunt) {
           compress: false
         },
         files: {
-          'grid.css': 'lib/grid/grid.styl'
+          'grid.css': 'grid.styl'
         }
       }
     },

@@ -1,5 +1,68 @@
-// This file is here to generate the grid for CSS distribution
+grid-generate-columns($units, $prefix = "")
+	$grid-prefix = ""
+	// Prefix with the grid variable
+	if grid-prefix and !support-for-bootstrap
+		$grid-prefix = s("%s-", unquote(grid-prefix))
+	// Set a prefix for the current generator
+	if $prefix
+		$prefix = s("%s-", unquote($prefix))
+	// The global prefix also need to be taken into account
+	if $grid-prefix
+		$prefix = s("%s%s", unquote($grid-prefix), unquote($prefix))
 
-@import "index"
+	// Allow a loop around for the column count, allows for multiple grids within generator
+	for $columns in $units
+		.{$prefix}span,
+		.{$prefix}span0
+			display: inline-block
+			width: 0
+			box-sizing: border-box
+			if support-for-ie and unit(grid-gutter-width) == "rem"
+				padding-left: rem(grid-gutter-width * 0.5)
+				padding-right: rem(grid-gutter-width * 0.5)
+			else
+				padding-left: (grid-gutter-width * 0.5)
+				padding-right: (grid-gutter-width * 0.5)
+			vertical-align: top
 
-grid-generate(12)
+		.{$prefix}push,
+		.{$prefix}pull,
+		.{$prefix}push0,
+		.{$prefix}pull0
+			position: relative
+
+		.{$prefix}prefix,
+		.{$prefix}prefix0
+			margin-left: 0
+
+		.{$prefix}suffix,
+		.{$prefix}suffix0
+			margin-right: 0
+
+		for $i in 1..$columns
+			$suffix = $i
+			if grid-force-suffix or length($units) > 1
+				$suffix = s("%sof%s", $i, $columns)
+
+			.{$prefix}span{$suffix}
+				@extend .{$prefix}span
+				width: (100% / $columns) * $i
+
+			.{$prefix}prefix{$suffix}
+				margin-left: (100% / $columns) * $i
+
+			.{$prefix}suffix{$suffix}
+				margin-right: (100% / $columns) * $i
+
+			.{$prefix}push{$suffix}
+				@extend .{$prefix}push
+				left: (100% / $columns) * $i
+
+			.{$prefix}pull{$suffix}
+				@extend .{$prefix}pull
+				left: (100% / $columns) * $i * -1
+
+			// Support for bootstrap should extend the normal prefix class
+			if support-for-bootstrap
+				.{$prefix}offset{$suffix}
+					@extend .{$prefix}prefix{$suffix}
