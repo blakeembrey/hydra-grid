@@ -74,6 +74,7 @@
 .grid-push12,
 .grid-pull12 {
   position: relative;
+  left: 0;
 }
 .grid-prefix,
 .grid-prefix0 {
@@ -316,6 +317,7 @@
   .grid-tablet-push12,
   .grid-tablet-pull12 {
     position: relative;
+    left: 0;
   }
   .grid-tablet-prefix,
   .grid-tablet-prefix0 {
@@ -559,6 +561,7 @@
   .grid-desktop-push12,
   .grid-desktop-pull12 {
     position: relative;
+    left: 0;
   }
   .grid-desktop-prefix,
   .grid-desktop-prefix0 {

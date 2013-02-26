@@ -30,6 +30,7 @@ grid-generate-columns($units, $prefix = "")
 		.{$prefix}push0,
 		.{$prefix}pull0
 			position: relative
+			left: 0
 
 		.{$prefix}prefix,
 		.{$prefix}prefix0
@@ -40,27 +41,28 @@ grid-generate-columns($units, $prefix = "")
 			margin-right: 0
 
 		for $i in 1..$columns
+			$width  = (100% / $columns) * $i
 			$suffix = $i
 			if grid-force-suffix or length($units) > 1
 				$suffix = s("%sof%s", $i, $columns)
 
 			.{$prefix}span{$suffix}
 				@extend .{$prefix}span
-				width: (100% / $columns) * $i
+				width: $width
 
 			.{$prefix}prefix{$suffix}
-				margin-left: (100% / $columns) * $i
+				margin-left: $width
 
 			.{$prefix}suffix{$suffix}
-				margin-right: (100% / $columns) * $i
+				margin-right: $width
 
 			.{$prefix}push{$suffix}
 				@extend .{$prefix}push
-				left: (100% / $columns) * $i
+				left: $width
 
 			.{$prefix}pull{$suffix}
 				@extend .{$prefix}pull
-				left: (100% / $columns) * $i * -1
+				left: $width * -1
 
 			// Support for bootstrap should extend the normal prefix class
 			if support-for-bootstrap
