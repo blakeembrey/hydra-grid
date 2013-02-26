@@ -1,6 +1,6 @@
 {
   "name": "pinch-grid",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Powerful fluid grid generator for Stylus and CSS",
   "main": "lib/grid.js",
   "scripts": {
