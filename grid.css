@@ -10,7 +10,6 @@
   margin: 0 -0.75rem;
   display: block;
   text-align: left;
-  word-spacing: -0.43em;
   letter-spacing: -0.31em;
 }
 .grid-row > .grid-row {
@@ -38,6 +37,7 @@
 .grid-span12 {
   display: inline-block;
   width: 0;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
   padding-left: 12px;
   padding-right: 12px;
@@ -281,6 +281,7 @@
   .grid-tablet-span12 {
     display: inline-block;
     width: 0;
+    -moz-box-sizing: border-box;
     box-sizing: border-box;
     padding-left: 12px;
     padding-right: 12px;
@@ -525,6 +526,7 @@
   .grid-desktop-span12 {
     display: inline-block;
     width: 0;
+    -moz-box-sizing: border-box;
     box-sizing: border-box;
     padding-left: 12px;
     padding-right: 12px;

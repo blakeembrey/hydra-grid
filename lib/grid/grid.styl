@@ -16,6 +16,7 @@ grid-generate-columns($units, $prefix = "")
 		.{$prefix}span0
 			display: inline-block
 			width: 0
+			-moz-box-sizing: border-box
 			box-sizing: border-box
 			if support-for-ie and unit(grid-gutter-width) == "rem"
 				padding-left: rem(grid-gutter-width * 0.5)
