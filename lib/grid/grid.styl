@@ -13,9 +13,9 @@ grid-generate-columns($units, $prefix = "")
 	// Allow a loop around for the column count, allows for multiple grids within generator
 	for $columns in $units
 		.{$prefix}span,
-		.{$prefix}span0
+		.{$prefix}span12
 			display: inline-block
-			width: 0
+			width: 100%
 			-moz-box-sizing: border-box
 			box-sizing: border-box
 			if support-for-ie and unit(grid-gutter-width) == "rem"
@@ -28,20 +28,20 @@ grid-generate-columns($units, $prefix = "")
 
 		.{$prefix}push,
 		.{$prefix}pull,
-		.{$prefix}push0,
-		.{$prefix}pull0
+		.{$prefix}push12,
+		.{$prefix}pull12
 			position: relative
 			left: 0
 
 		.{$prefix}prefix,
-		.{$prefix}prefix0
+		.{$prefix}prefix12
 			margin-left: 0
 
 		.{$prefix}suffix,
-		.{$prefix}suffix0
+		.{$prefix}suffix12
 			margin-right: 0
 
-		for $i in 1..$columns
+		for $i in 0...$columns
 			$width  = (100% / $columns) * $i
 			$suffix = $i
 			if grid-force-suffix or length($units) > 1
