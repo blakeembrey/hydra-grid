@@ -27,18 +27,14 @@ grid-generate-columns($units, $prefix = "")
 			vertical-align: top
 
 		.{$prefix}push,
-		.{$prefix}pull,
-		.{$prefix}push12,
-		.{$prefix}pull12
+		.{$prefix}pull
 			position: relative
 			left: 0
 
-		.{$prefix}prefix,
-		.{$prefix}prefix12
+		.{$prefix}prefix
 			margin-left: 0
 
-		.{$prefix}suffix,
-		.{$prefix}suffix12
+		.{$prefix}suffix
 			margin-right: 0
 
 		for $i in 0...$columns
