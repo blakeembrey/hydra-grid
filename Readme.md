@@ -8,8 +8,8 @@ Currently generating the grid within a media query doesn't work. It's just waiti
 
 ```
 $ bower install pinch-grid
-$ component install blakeembrey/grid
-$ npm install blakeembrey-grid --save
+$ npm install pinch-grid --save
+$ component install blakeembrey/pinch-grid
 ```
 
 ## Stylus API
