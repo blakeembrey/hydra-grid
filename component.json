@@ -1,6 +1,7 @@
 {
   "name": "pinch-grid",
   "main": ["./grid.css"],
+  "version": "0.0.2",
   "dependencies": {
     "stylus-type-utils": "latest"
   }
