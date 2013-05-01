@@ -6,5 +6,5 @@
 @import "grid"
 
 grid-generate($units, $prefix = "")
-	grid-generate-container()
-	grid-generate-columns($units, $prefix)
+  grid-generate-core(mixin == 'root')
+  grid-generate-columns($units, $prefix, mixin == 'root')

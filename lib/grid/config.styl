@@ -1,6 +1,3 @@
-// Support for Bootstrap grid system defaulting to false
-support-for-bootstrap ?= false
-
 // Support for old IE
 support-for-ie ?= true
 
@@ -9,3 +6,6 @@ grid-prefix       ?= "grid"
 grid-alignment    ?= left
 grid-gutter-width ?= 1.5rem
 grid-force-suffix ?= false
+
+// Private variable to find if we generated an earlier grid we can extend
+grid-root-config  ?= null false // `root class` `generated core`

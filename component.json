@@ -1,5 +1,5 @@
 {
-  "name": "pinch-grid",
+  "name": "hydra-grid",
   "main": ["./grid.css"],
   "version": "0.0.2",
   "dependencies": {
