@@ -1,5 +1,7 @@
 # Hydra Grid
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/blakeembrey/hydra-grid.svg)](https://greenkeeper.io/)
+
 Simple CSS grid utilizing the `inline-block` and `box-sizing` properties for awesome layouts. It can easily be dropped in over the top of another CSS grid and can be used to size any element to the grid widths.
 
 ## Installation
