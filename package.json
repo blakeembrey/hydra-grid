@@ -18,7 +18,7 @@
   "license": "MIT",
   "readmeFilename": "Readme.md",
   "devDependencies": {
-    "stylus": "~0.32.1"
+    "stylus": "~0.54.5"
   },
   "peerDependencies": {
     "stylus": "0.x"
